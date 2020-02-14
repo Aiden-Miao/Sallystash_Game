@@ -2,20 +2,16 @@ package edu.duke.ece651.sallystash;
 
 import java.util.ArrayList;
 
-import sun.nio.ch.DirectBuffer;
-
 public class board {
   int height;
   int width;
   block[][] board;
-  ArrayList<stash> mystash;
-  //boolean[][] state;
+  //ArrayList<stash> mystash;
   
   public board(int h, int w) {
     height = h;
     width = w;
     board = new block[h][w];
-    //state = new boolean[h][w];
     for (int i = 0; i < h; i++) {
       for (int j = 0; j < w; j++) {
         board[i][j] = new block();
@@ -31,20 +27,16 @@ public class board {
     return width;
   }
 
-  //place a stash, store it in the board;
-  //change the blocks, and relate the blocks
-  //to current stash
-  public void place_stash(int x, int y, char direct) {
-    stash new_stash = new stash(x, y, direct);
-    mystash.add(new_stash);
-    place_block(x, y, direct);
-    
+  //place the blocks on the board and bind them with stash
+  public void place_block(stash curr_stash) {
+    ArrayList<block> blocks = curr_stash.getallblock();
+    for (block my_block : blocks) {
+      board[my_block.getx()][my_block.gety()].occupy_block();
+      board[my_block.getx()][my_block.gety()].setstash(curr_stash);
+    }
   }
-
-  public void place_block(x, y, new_stash) {
-    
-  }
-  //dig at (x,y), if find stash change the state to hit
+  
+  //dig at (x,y), if we find stash, then change the state to hit
   public void digat(int x, int y) {
     if (!board[x][y].is_occupied()) {
       System.out.println("you missed!\n");
@@ -52,7 +44,5 @@ public class board {
     else {
       board[x][y].dig_block();
     }
-  }
-
-  
+  }  
 }
