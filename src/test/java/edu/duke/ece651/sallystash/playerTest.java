@@ -18,9 +18,9 @@ public class playerTest {
     p1.dig(5, 5, p1.getboard());
     p1.dig(0, 0, p1.getboard());
     display disp = new display();
-    disp.display_myboard(disp.draw_opponentboard(p1.getboard()));
-    disp.display_myboard(disp.draw_myboard(p1.getboard()));
-    disp.display_bothboard(disp.draw_myboard(p1.getboard()), disp.draw_opponentboard(p1.getboard()));
+    //disp.display_myboard(disp.draw_opponentboard(p1.getboard()));
+    //disp.display_board(disp.draw_myboard(p1.getboard()));
+    disp.display_board(disp.draw_wholeboard(p1.getboard(), p1.getboard()));
   }
 
 }
