@@ -15,6 +15,11 @@ public class player {
     playboard.place_block(playstash);
   }
 
+  public void dig(int x, int y, board oppboard) {
+    oppboard.digat(x, y);
+  }
+
+    
   public board getboard() {
     return playboard;
   }

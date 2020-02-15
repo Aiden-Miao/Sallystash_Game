@@ -40,6 +40,9 @@ public class board {
   public void digat(int x, int y) {
     if (!board[x][y].is_occupied()) {
       System.out.println("you missed!\n");
+      //even miss, we still mark as hit,
+      //may be better way to do this
+      board[x][y].dig_block();
     }
     else {
       board[x][y].dig_block();

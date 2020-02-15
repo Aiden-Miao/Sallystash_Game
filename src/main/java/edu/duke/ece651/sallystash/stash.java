@@ -27,28 +27,14 @@ public class stash {
       allblock.add(new block(x, y + 2));
       allblock.add(new block(x, y + 3));
       break;
-      //return stash;
     }
     case 'V':{
       allblock.add(new block(x + 1, y));
       allblock.add(new block(x + 2, y));
       allblock.add(new block(x + 3, y));
       break;
-      //return stash;
     }
     }
-    /*
-    if (direction == 'H' || direction == 'h') {
-      allblock.add(new block(x + 1, y));
-      allblock.add(new block(x + 2, y));
-      allblock.add(new block(x + 3, y));
-    }
-    else if (direction == 'V' || direction == 'v') {
-      allblock.add(new block(x, y + 1));
-      allblock.add(new block(x, y + 2));
-      allblock.add(new block(x, y + 3));
-    }    
-    */
   }
    
   public ArrayList<block> getallblock() {
