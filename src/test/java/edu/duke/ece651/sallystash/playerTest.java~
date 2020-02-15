@@ -4,11 +4,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-public class sallystashTest {
+public class playerTest {
   @Test
   public void test_() {
-    //sallystash mygame = new sallystash(10, 20);
-    
+    stash G1 = new stash('G');
+    stash G2 = new stash('G');
+    stash P1 = new stash('P');
   }
 
 }

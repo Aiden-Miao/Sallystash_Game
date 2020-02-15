@@ -3,9 +3,9 @@ package edu.duke.ece651.sallystash;
 import java.util.ArrayList;
 
 public class board {
-  int height;
-  int width;
-  block[][] board;
+  private int height;
+  private int width;
+  private block[][] board;
   //ArrayList<stash> mystash;
   
   public board(int h, int w) {
@@ -44,5 +44,9 @@ public class board {
     else {
       board[x][y].dig_block();
     }
-  }  
+  }
+
+  public block[][] getblock() {
+    return board;
+  }
 }
