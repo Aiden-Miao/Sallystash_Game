@@ -43,8 +43,12 @@ public class block {
   }
   
   //occupy the block
-  public void occupy_block() {
+  public int occupy_block() {
+    if (occupied == true) {
+      return -1;
+    }
     occupied = true;
+    return 0;
   }
   
   //if the block is occupied

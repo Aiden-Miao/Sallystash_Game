@@ -73,6 +73,7 @@ public class display {
             wholeboard = wholeboard + "*" + div_line;
           }
           else {
+            assert(my_board.getblock()[i][j].getstash() != null);
             wholeboard = wholeboard + my_board.getblock()[i][j].getstash().getcolor() + div_line;
           }
         }
