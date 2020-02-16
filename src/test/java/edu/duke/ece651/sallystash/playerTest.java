@@ -25,5 +25,4 @@ public class playerTest {
     //disp.display_board(disp.draw_myboard(p1.getboard()));
     disp.display_board(disp.draw_wholeboard(p1.getboard(), p1.getboard()));
   }
-
 }

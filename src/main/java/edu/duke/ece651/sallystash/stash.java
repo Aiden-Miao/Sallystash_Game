@@ -15,7 +15,10 @@ public class stash {
     //initialize blocklist
     allblock = new ArrayList<block>();
   }
-  
+
+  public void reset_blocks() {
+    allblock = new ArrayList<block>();
+  }
   public void place_stash(int x, int y, char orient) {
     beginblock = new block(x, y);
     assert(beginblock != null);//test
@@ -23,15 +26,67 @@ public class stash {
     allblock.add(beginblock);
     switch(orient){
     case 'H':{
-      allblock.add(new block(x, y + 1));
-      allblock.add(new block(x, y + 2));
-      allblock.add(new block(x, y + 3));
+      switch(color){
+        //green block 1x2
+      case 'G':{
+        allblock.add(new block(x, y + 1));
+        break;
+      }
+        //purple block 1x3
+      case 'P': {
+        allblock.add(new block(x, y + 1));
+        allblock.add(new block(x, y + 2));
+        break;
+      }
+        //red block 1x4
+      case 'R': {
+        allblock.add(new block(x, y + 1));
+        allblock.add(new block(x, y + 2));
+        allblock.add(new block(x, y + 3));
+        break;
+      }
+        //blue block 1x6
+      case 'B': {
+        allblock.add(new block(x, y + 1));
+        allblock.add(new block(x, y + 2));
+        allblock.add(new block(x, y + 3));
+        allblock.add(new block(x, y + 4));
+        allblock.add(new block(x, y + 5));
+        break;
+      }
+      }
       break;
     }
     case 'V':{
-      allblock.add(new block(x + 1, y));
-      allblock.add(new block(x + 2, y));
-      allblock.add(new block(x + 3, y));
+      switch(color){
+        //green block 1x2
+      case 'G':{
+        allblock.add(new block(x + 1, y));
+        break;
+      }
+        //purple block 1x3
+      case 'P': {
+        allblock.add(new block(x + 1, y));
+        allblock.add(new block(x + 2, y));
+        break;
+      }
+        //red block 1x4
+      case 'R': {
+        allblock.add(new block(x + 1, y));
+        allblock.add(new block(x + 2, y));
+        allblock.add(new block(x + 3, y));
+        break;
+      }
+        //blue block 1x6
+      case 'B': {
+        allblock.add(new block(x + 1, y));
+        allblock.add(new block(x + 2, y));
+        allblock.add(new block(x + 3, y));
+        allblock.add(new block(x + 4, y));
+        allblock.add(new block(x + 5, y));
+        break;
+      }
+      }
       break;
     }
     }

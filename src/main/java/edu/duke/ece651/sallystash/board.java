@@ -34,12 +34,12 @@ public class board {
     //check for invalid cordinates and overlap here.
     for (block my_block : blocks) {
       if ((my_block.getx() < 0 || my_block.getx() >= height) || (my_block.gety() < 0 || my_block.gety() >= width)) {
-        System.out.println("invalid cordinates!\n");
+        System.out.println("invalid cordinates, place again!\n");
         return -1;
       }
       
       if (board[my_block.getx()][my_block.gety()].is_occupied() == true) {
-        System.out.println("Your stash is overlapping with others!\n");
+        System.out.println("Your stash is overlapping with others, place again!\n");
         return -1;
       }
     }
