@@ -15,7 +15,11 @@ public class player {
     //we don't need to reset begining block because it's gonna be set to new value anyway
     playstash.reset_blocks();
     //add blocks into stash
-    playstash.place_stash(cordinate[0], cordinate[1], orient);
+    if (playstash.place_stash(cordinate[0], cordinate[1], orient) == -1) {
+      System.out.println("The stash and orientation don't match, place again!\n");
+      return -1;
+    }
+    ;
     //try to place block on the board
     if (playboard.place_block(playstash) == -1) {
       return -1;

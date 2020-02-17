@@ -23,7 +23,7 @@ public class stash {
   }
 
   //place the stash, calculate the cor of each block based on the beginning block
-  public void place_stash(int x, int y, char orient) {
+  public int place_stash(int x, int y, char orient) {
     beginblock = new block(x, y);
     assert(beginblock != null);//test
     assert(allblock != null);//test
@@ -46,8 +46,11 @@ public class stash {
         allblock.add(new block(x + 4, y + 1));
         break;
       }
+      default: {
+        return -1;
       }
-      break;
+      }
+      return 0;
     }
       //Right
     case 'R': {
@@ -66,8 +69,11 @@ public class stash {
         allblock.add(new block(x - 1 , y + 4));
         break;
       }
+      default:{
+        return -1;
       }
-      break;
+      }
+      return 0;
     }
       //Down
     case 'D': {
@@ -86,8 +92,11 @@ public class stash {
         allblock.add(new block(x + 4 , y - 1));
         break;
       }
+      default: {
+        return -1;
       }
-      break;
+      }
+      return 0;
     }
       //Left
     case 'L': {
@@ -106,8 +115,11 @@ public class stash {
         allblock.add(new block(x + 1 , y + 4));
         break;
       }
+      default: {
+        return -1;
       }
-      break;
+      }
+      return 0;
     }
       //Herizon
     case 'H':{
@@ -123,24 +135,11 @@ public class stash {
         allblock.add(new block(x, y + 2));
         break;
       }
-        //red block 1x4
-      case 'R': {
-        allblock.add(new block(x, y + 1));
-        allblock.add(new block(x, y + 2));
-        allblock.add(new block(x, y + 3));
-        break;
-      }
-        //blue block 1x6
-      case 'B': {
-        allblock.add(new block(x, y + 1));
-        allblock.add(new block(x, y + 2));
-        allblock.add(new block(x, y + 3));
-        allblock.add(new block(x, y + 4));
-        allblock.add(new block(x, y + 5));
-        break;
+      default: {
+        return -1;
       }
       }
-      break;
+      return 0;
     }
     case 'V':{
       switch(color){
@@ -155,24 +154,15 @@ public class stash {
         allblock.add(new block(x + 2, y));
         break;
       }
-        //red block 1x4
-      case 'R': {
-        allblock.add(new block(x + 1, y));
-        allblock.add(new block(x + 2, y));
-        allblock.add(new block(x + 3, y));
-        break;
-      }
-        //blue block 1x6
-      case 'B': {
-        allblock.add(new block(x + 1, y));
-        allblock.add(new block(x + 2, y));
-        allblock.add(new block(x + 3, y));
-        allblock.add(new block(x + 4, y));
-        allblock.add(new block(x + 5, y));
-        break;
+      default:{
+        return -1;
       }
       }
-      break;
+      return 0;
+      //break;
+    }
+    default: {
+      return -1;
     }
     }
   }

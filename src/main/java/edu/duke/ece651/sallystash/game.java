@@ -99,6 +99,7 @@ public class game {
       split_line();
       System.out.println("Player B, it's your turn to guess!\n");
       guess(A);
+      //if all A's stash are dug, then B wins
       if (all_been_dig(A) == 0) {
         System.out.println("Player B wins, congratulation!\n");
         break;
