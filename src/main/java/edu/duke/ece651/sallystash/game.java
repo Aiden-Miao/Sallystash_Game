@@ -189,7 +189,7 @@ public class game {
         System.out.println("Invalid column!\n");
         continue;
       }
-      if((s.charAt(2) != 'H')&&(s.charAt(2) != 'V')) {
+      if((s.charAt(2) != 'H')&&(s.charAt(2) != 'V')&&(s.charAt(2)!='U')&&(s.charAt(2)!='D'&&(s.charAt(2)!='L')&&(s.charAt(2)!='R'))) {
         validinput = false;
         System.out.println("Invalid direction!\n");
         continue;

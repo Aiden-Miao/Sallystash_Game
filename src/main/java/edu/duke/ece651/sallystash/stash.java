@@ -29,6 +29,87 @@ public class stash {
     assert(allblock != null);//test
     allblock.add(beginblock);
     switch(orient){
+      //Up
+    case 'U': {
+      switch (color) {
+      case 'R': {
+        allblock.add(new block(x + 1, y));
+        allblock.add(new block(x + 1, y - 1));
+        allblock.add(new block(x + 1, y + 1));
+        break;
+      }
+      case 'B': {
+        allblock.add(new block(x + 1, y));
+        allblock.add(new block(x + 2, y));
+        allblock.add(new block(x + 2, y + 1));
+        allblock.add(new block(x + 3, y + 1));
+        allblock.add(new block(x + 4, y + 1));
+        break;
+      }
+      }
+      break;
+    }
+      //Right
+    case 'R': {
+      switch (color) {
+      case 'R': {
+        allblock.add(new block(x + 1, y));
+        allblock.add(new block(x + 2, y));
+        allblock.add(new block(x + 1, y + 1));
+        break;
+      }
+      case 'B': {
+        allblock.add(new block(x, y + 1));
+        allblock.add(new block(x, y + 2));
+        allblock.add(new block(x - 1 , y + 2));
+        allblock.add(new block(x - 1 , y + 3));
+        allblock.add(new block(x - 1 , y + 4));
+        break;
+      }
+      }
+      break;
+    }
+      //Down
+    case 'D': {
+      switch (color) {
+      case 'R': {
+        allblock.add(new block(x, y + 1));
+        allblock.add(new block(x, y + 2));
+        allblock.add(new block(x + 1, y + 1));
+        break;
+      }
+      case 'B': {
+        allblock.add(new block(x + 1, y));
+        allblock.add(new block(x + 2, y));
+        allblock.add(new block(x + 2 , y - 1));
+        allblock.add(new block(x + 3 , y - 1));
+        allblock.add(new block(x + 4 , y - 1));
+        break;
+      }
+      }
+      break;
+    }
+      //Left
+    case 'L': {
+      switch (color) {
+      case 'R': {
+        allblock.add(new block(x + 1, y));
+        allblock.add(new block(x + 2, y));
+        allblock.add(new block(x + 1, y -1));
+        break;
+      }
+      case 'B': {
+        allblock.add(new block(x, y + 1));
+        allblock.add(new block(x, y + 2));
+        allblock.add(new block(x + 1 , y + 2));
+        allblock.add(new block(x + 1 , y + 3));
+        allblock.add(new block(x + 1 , y + 4));
+        break;
+      }
+      }
+      break;
+    }
+      //Herizon
     case 'H':{
       switch(color){
         //green block 1x2
