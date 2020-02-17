@@ -12,6 +12,7 @@ public class player {
   //the place_stash method of stash add a list of blocks with their cordinates initialized to the stash blocks, then we pass the stash to the board, board change the states based on the blocks and bind them with the stash.
   public int put_stash(int[] cordinate, char orient, stash playstash) {
     //reset the blocks inside stash
+    //we don't need to reset begining block because it's gonna be set to new value anyway
     playstash.reset_blocks();
     //add blocks into stash
     playstash.place_stash(cordinate[0], cordinate[1], orient);

@@ -11,6 +11,7 @@ public class game {
     B = new player(h, w);
   }
   void playgame() {
+    //initialize stash for A
     stash A_G1 = new stash('G');
     stash A_G2 = new stash('G');
     stash A_P1 = new stash('P');
@@ -22,6 +23,7 @@ public class game {
     stash A_B1 = new stash('B');
     stash A_B2 = new stash('B');
 
+    //intialize stash for B
     stash B_G1 = new stash('G');
     stash B_G2 = new stash('G');
     stash B_P1 = new stash('P');
@@ -76,18 +78,25 @@ public class game {
     player_place_stash(B, B_B1);
     System.out.println("Player B, where do you want to place the second Blue Stack?\n");
     player_place_stash(B, B_B2);
-    
-    display disp = new display();
-    //int is_win = -1;
-    while (true) {
+    while(true){
+      display disp = new display();
+      split_line();
+      System.out.println("Player A's turn:\n");
+      System.out.println("     Your tree" + "                              " + "Player B's tree\n");
       disp.display_board(disp.draw_wholeboard(A.getboard(), B.getboard()));
+      split_line();
       System.out.println("Player A, it's your turn to guess!\n");
       guess(B);
+      //if all of B's stashed are dug, then A wins
       if (all_been_dig(B) == 0) {
-        System.out.println("Player A wins, congratulation!\n");
-        break;
+      System.out.println("Player A wins, congratulation!\n");
+      break;
       }
+      split_line();
+      System.out.println("Player B's turn:\n");
+      System.out.println("     Your tree" + "                              " + "Player A's tree\n");
       disp.display_board(disp.draw_wholeboard(B.getboard(), A.getboard()));
+      split_line();
       System.out.println("Player B, it's your turn to guess!\n");
       guess(A);
       if (all_been_dig(A) == 0) {
@@ -97,6 +106,7 @@ public class game {
     } 
   }
 
+  //if all the stash has been dug
   public int all_been_dig(player P) {
     board b = P.getboard();
     for (int i = 0; i < b.get_height(); i++) {
@@ -113,6 +123,16 @@ public class game {
     //if all of the occupied block is hit, then player wins
     return 0;
   }
+
+  public void split_line() {
+    for (int i = 0; i < 65; i++) {
+      System.out.printf("-");
+      if (i == 64) {
+        System.out.println("\n");
+      }
+    }
+  }
+  
   public void guess(player P) {
     String s;
     Scanner sc = new Scanner(System.in);
@@ -120,7 +140,7 @@ public class game {
     while (!validinput) {
       s = sc.nextLine();
       s = s.toUpperCase();
-      System.out.println(s);
+      //System.out.println(s);
       if (s.length() != 2) {
         validinput = false;
         System.out.println("Invalid input length!\n");
@@ -139,7 +159,7 @@ public class game {
       char[] parameter = s.toCharArray();
       int[] cor = new int[2];
       cor[0] = (int) parameter[0] - 65;
-      System.out.println(cor[0]);
+      //System.out.println(cor[0]);
       cor[1] = (int) parameter[1] - 48;
       P.dig(cor[0], cor[1], P.getboard());
       validinput = true;
@@ -153,7 +173,7 @@ public class game {
     while (!validinput) {
       s = sc.nextLine();
       s = s.toUpperCase();
-      System.out.println(s);
+      //System.out.println(s);
       if (s.length() != 3) {
         validinput = false;
         System.out.println("Invalid input length!\n");
@@ -177,7 +197,7 @@ public class game {
       char[] parameter = s.toCharArray();
       int[] cor = new int[2];
       cor[0] = (int) parameter[0] - 65;
-      System.out.println(cor[0]);
+      //System.out.println(cor[0]);
       cor[1] = (int) parameter[1] - 48;
       //System.out.println(cor[1]);
       if (P.put_stash(cor, parameter[2], sh) == -1) {

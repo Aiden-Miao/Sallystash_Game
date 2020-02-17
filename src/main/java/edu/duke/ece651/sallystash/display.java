@@ -98,7 +98,8 @@ public class display {
         else{
           div_line = "|";
         }
-        //if it's been dug, see if it's a hit or misss
+        //if it's been dug, see if it's a hit or miss
+        // we might need to change the logic here, how to keep the original board after we move?
         if(opp_board.getblock()[i][j].is_hit()){
           if (opp_board.getblock()[i][j].is_occupied()) {
             //oppboard = oppboard + "*" + div_line;

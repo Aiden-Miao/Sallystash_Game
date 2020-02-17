@@ -8,6 +8,7 @@ public class board {
   private block[][] board;
   //ArrayList<stash> mystash;
 
+  //initialize the whole board with heights and width
   public board(int h, int w) {
     height = h;
     width = w;
@@ -30,14 +31,14 @@ public class board {
   //place the blocks on the board and bind them with stash
   public int place_block(stash curr_stash) {
     ArrayList<block> blocks = curr_stash.getallblock();
-
-    //check for invalid cordinates and overlap here.
+    //check for invalid cordinates
     for (block my_block : blocks) {
       if ((my_block.getx() < 0 || my_block.getx() >= height) || (my_block.gety() < 0 || my_block.gety() >= width)) {
         System.out.println("invalid cordinates, place again!\n");
         return -1;
       }
-      
+      //check for overlap, might have some bug here in ver2 move.
+      //we might need to change the state of the original position
       if (board[my_block.getx()][my_block.gety()].is_occupied() == true) {
         System.out.println("Your stash is overlapping with others, place again!\n");
         return -1;

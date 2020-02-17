@@ -17,7 +17,7 @@ public class block {
     return y_cor;
   }
   
-  //get the stash block belong to
+  //get the stash that our block belong to
   public stash getstash() {
     return belong_stash;
   }
@@ -27,14 +27,13 @@ public class block {
     belong_stash = mystash;
   }
   
-  //initialize block
+  //initialize block, is not hit or occupied
   public block() {
     hit = false;
     occupied = false;
   }
   
-  //initialize the block with cordinate,
-  //is_hit set default to false
+  //initialize the block with cordinate, is_hit set default to false
   public block(int x, int y) {
     occupied = true;
     hit = false;
@@ -42,7 +41,7 @@ public class block {
     y_cor = y;
   }
   
-  //occupy the block
+  //occupy the block, set occupied to true
   public int occupy_block() {
     if (occupied == true) {
       return -1;
@@ -51,13 +50,12 @@ public class block {
     return 0;
   }
   
-  //if the block is occupied
+  //return if the block is occupied
   public boolean is_occupied() {
     return occupied;
   }
   
-  //dig the block
-  //maybe there is a better way
+  //dig the block, make the hit to true
   void dig_block() {
     hit = true;
   }

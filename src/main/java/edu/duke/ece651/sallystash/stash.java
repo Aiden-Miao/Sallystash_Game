@@ -6,19 +6,23 @@ public class stash {
   //private string shape;
   private char color;
   private block beginblock;//the beginning of the block
-  private ArrayList<block> allblock;//all the block inside
+  private ArrayList<block> allblock;//all the block inside our stash
   
-  //put a stash in here
-  //add all the block into this stash
+  //initialize a stash
   public stash(char col) {
     color = col;
+    //do we also need to initialize beginblock?
     //initialize blocklist
     allblock = new ArrayList<block>();
   }
 
+  //after we set up arraylist of blocks, if the board found the block
+  //cordinate is invalid, we need to set again, so we need to reset our blocks
   public void reset_blocks() {
     allblock = new ArrayList<block>();
   }
+
+  //place the stash, calculate the cor of each block based on the beginning block
   public void place_stash(int x, int y, char orient) {
     beginblock = new block(x, y);
     assert(beginblock != null);//test
