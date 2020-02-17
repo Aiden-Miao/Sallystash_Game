@@ -18,8 +18,7 @@ public class player {
     if (playstash.place_stash(cordinate[0], cordinate[1], orient) == -1) {
       System.out.println("The stash and orientation don't match, place again!\n");
       return -1;
-    }
-    ;
+    };
     //try to place block on the board
     if (playboard.place_block(playstash) == -1) {
       return -1;
@@ -38,7 +37,37 @@ public class player {
     }
   }
 
-    
+  public int find(int x, int y, board myboard) {
+    if ((x < 0 || x >= myboard.get_height())|| y < 0 || y >=myboard.get_width()){
+      System.out.println("You dig a invalid position, dig again!\n");
+      return -1;
+    }
+    //if the place have stash or not
+    if (!myboard.getblock()[x][y].is_occupied()) {
+      System.out.println("There's no stash here to move, choose a right place!\n");
+      return -1;
+    }
+    //clear the block within the stash, but we can still get the color from the stash
+    myboard.find_stash(x, y);
+    return 0;
+  }
+
+  //record all the relative cordinate of all the hit block
+  public ArrayList<int[]> find_allhits(int x, int y , board myboard) {
+    ArrayList<int []> hitlist = new ArrayList<int []>();
+    stash my_stash = myboard.getblock()[x][y].getstash();
+    for (int i = 0; i < myboard.get_height(); i++) {
+      for (int j = 0; j < myboard.get_width(); j++) {
+        if (myboard.getblock()[i][j].getstash() == my_stash) {
+          if (myboard.getblock()[i][j].is_hit()) {
+            int[] temp = {i - x, j - y};
+            hitlist.add(temp);
+          }
+        }
+      }
+    }
+    return hitlist;
+  }
   public board getboard() {
     return playboard;
   }

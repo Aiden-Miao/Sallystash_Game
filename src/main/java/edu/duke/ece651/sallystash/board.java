@@ -51,14 +51,14 @@ public class board {
     return 0;
   }
 
-//dig at (x,y), if we find stash, then change the state to hit
-public void digat(int x, int y) {
-/*
-    if ((x < 0 || x >= height)|| (y < 0 || y >= width)) {
-      System.out.println("You dig a invalid position!\n");
-      return -1;
-    }
-*/
+  //dig at (x,y), if we find stash, then change the state to hit
+  public void digat(int x, int y) {
+    /*
+  if ((x < 0 || x >= height)|| (y < 0 || y >= width)) {
+  System.out.println("You dig a invalid position!\n");
+  return -1;
+  }
+    */
     if (board[x][y].is_occupied()) {
       System.out.println("You found a stack!\n");
       //may be better way to do this
@@ -71,6 +71,24 @@ public void digat(int x, int y) {
     //return 0;
   }
 
+  //find all the blocks inside the stash, and clear them
+  public void find_stash(int x, int y) {
+    //char newcolor = getblock()[x][y].getstash().getcolor();
+    stash mvstash = board[x][y].getstash();
+    for (int i = 0; i < height; i++) {
+      for (int j = 0; j < width; j++) {
+        if (board[i][j].getstash() == mvstash) {
+          board[i][j].clear_block();
+          // if (board[i][j].is_hit()) {
+          //int[] temp = {i-x, j-y};
+          // hitlist.add(temp);
+          //}
+        }
+      }
+    }
+  }
+  
+  
   public block[][] getblock() {
     return board;
   }

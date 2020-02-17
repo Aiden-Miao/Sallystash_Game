@@ -98,16 +98,26 @@ public class display {
         else{
           div_line = "|";
         }
-        //if it's been dug, see if it's a hit or miss
-        // we might need to change the logic here, how to keep the original board after we move?
+        //for ver2: we add a miss to block
+        //if it's a hit, it's definetly hit
+        //after check hit, we then check miss
+        //because we may rehit the block again
+        //so in the second board, it has nothing to do with is_occupied
         if(opp_board.getblock()[i][j].is_hit()){
-          if (opp_board.getblock()[i][j].is_occupied()) {
+          // if (opp_board.getblock()[i][j].is_occupied()) {
             //oppboard = oppboard + "*" + div_line;
-            wholeboard = wholeboard + opp_board.getblock()[i][j].getstash().getcolor() + div_line;
+          if (opp_board.getblock()[i][j].is_move()) {
+            wholeboard += " " + div_line;
           }
           else {
-            wholeboard = wholeboard + "X" + div_line;
+            wholeboard = wholeboard + opp_board.getblock()[i][j].getstash().getcolor() + div_line;
           }
+          // }
+          //else {
+        }
+        else if(opp_board.getblock()[i][j].is_miss()){
+            wholeboard = wholeboard + "X" + div_line;
+            // }
         }
         //if it's not dug, then we should show it empty
         else{
