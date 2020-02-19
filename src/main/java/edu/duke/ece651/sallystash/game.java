@@ -7,11 +7,28 @@ import java.util.Scanner;
 public class game {
   private player A;
   private player B;
-
+  //private int sonar_action;
+  //private int move_action;
   public game(int h, int w) {
-    A = new player(h, w);
-    B = new player(h, w);
+    A = new player(h, w,"A");
+    B = new player(h, w,"B");
   }
+
+  public void print_allstack() {
+    String greenstack = "Green stacks that";
+    String purplestack = "Purple stacks that";
+    String redstack = "Red stacks that";
+    String bluestack = "Blue stacks that";
+    System.out.println("2    "+greenstack+"    1x2\n");
+    System.out.println("3    "+purplestack+"    1x3\n");
+    System.out.println("3    "+redstack+"    1x4\n");
+    System.out.println("3    "+bluestack+"    1x6\n");
+  }
+
+  public void print_promt(String player_name, String number_of_stack, String color) {
+    System.out.println("Player " + player_name + ", where do you want to place the " + number_of_stack + " " + color + " stack?");
+  }
+    
   void playgame() {
     //initialize stash for A
     stash A_G1 = new stash('G');
@@ -38,54 +55,86 @@ public class game {
     stash B_B2 = new stash('B');
     stash B_B3 = new stash('B');
     //player A place stash
-    System.out.println("Player A, where do you want to place the first Green Stack?\n");
+    System.out.println(
+        "Player A, you are going place sally's stash on the board, Make sure Player B isn't looking! For each stach, type the cordinate of the upper left side of the stash, followed by either H(for horizontal) or V(for vertical). For example, M4H would place a stack horizontally starting at M4 and going to the right. You have\n");
+    //print all stacks
+    print_allstack();
+    /*
+    print_promt("A", "first", "Green");
     player_place_stash(A, A_G1, null);
-    System.out.println("Player A, where do you want to place the second Green Stack?\n");
+    print_promt("A", "second", "Green");
     player_place_stash(A, A_G2, null);
-    System.out.println("Player A, where do you want to place the first Purple Stack?\n");
+    print_promt("A", "first", "Purple");
     player_place_stash(A, A_P1, null);
-    System.out.println("Player A, where do you want to place the second Purple Stack?\n");
+    print_promt("A", "second", "Purple");
     player_place_stash(A, A_P2, null);
-    System.out.println("Player A, where do you want to place the third Purple Stack?\n");
-    player_place_stash(A, A_P3, null);
-    System.out.println("Player A, where do you want to place the first Red Stack?\n");
+    print_promt("A", "third", "Purple");
+    player_place_stash(A, A_P3, null);  
+    */    
+    print_promt("A", "first", "Red");
     player_place_stash(A, A_R1, null);
-    System.out.println("Player A, where do you want to place the second Red Stack?\n");
+    print_promt("A", "second", "Red");
     player_place_stash(A, A_R2, null);
-    System.out.println("Player A, where do you want to place the third Red Stack?\n");
+    print_promt("A", "third", "Red");
     player_place_stash(A, A_R3, null);
-    System.out.println("Player A, where do you want to place the first Blue Stack?\n");
+    /*    
+    print_promt("A", "first", "Blue");
     player_place_stash(A, A_B1, null);
-    System.out.println("Player A, where do you want to place the second Blue Stack?\n");
+    print_promt("A", "second", "Blue");
     player_place_stash(A, A_B2, null);
-    System.out.println("Player A, where do you want to place the second Blue Stack?\n");
+    print_promt("A", "third", "Blue");
     player_place_stash(A, A_B3, null);
-    
+    */
     //player B place stash
-    System.out.println("Player B, where do you want to place the first Green Stack?\n");
+    /*
+    print_promt("B", "first", "Green");
     player_place_stash(B, B_G1, null);
-    System.out.println("Player B, where do you want to place the second Green Stack?\n");
+    print_promt("B", "second", "Green");
     player_place_stash(B, B_G2, null);
-    System.out.println("Player B, where do you want to place the first Purple Stack?\n");
+    print_promt("B", "first", "Purple");
     player_place_stash(B, B_P1, null);
-    System.out.println("Player B, where do you want to place the second Purple Stack?\n");
+    print_promt("B", "second", "Purple");
     player_place_stash(B, B_P2, null);
-    System.out.println("Player B, where do you want to place the third Purple Stack?\n");
+    print_promt("B", "third", "Purple");
     player_place_stash(B, B_P3, null);
-    System.out.println("Player B, where do you want to place the first Red Stack?\n");
+    */    
+    print_promt("B", "first", "Red");
     player_place_stash(B, B_R1, null);
-    System.out.println("Player B, where do you want to place the second Red Stack?\n");
+    print_promt("B", "second", "Red");
     player_place_stash(B, B_R2, null);
-    System.out.println("Player B, where do you want to place the third Red Stack?\n");
+    print_promt("B", "third", "Red");
     player_place_stash(B, B_R3, null);
-    System.out.println("Player B, where do you want to place the first Blue Stack?\n");
+    /*    
+    print_promt("B", "first", "Blue");
     player_place_stash(B, B_B1, null);
-    System.out.println("Player B, where do you want to place the second Blue Stack?\n");
+    print_promt("B", "second", "Blue");
     player_place_stash(B, B_B2, null);
-    System.out.println("Player B, where do you want to place the second Blue Stack?\n");
+    print_promt("B", "third", "Blue");
     player_place_stash(B, B_B3, null);
+    */    
+    while (true) {
+      my_action(A, B);
+      my_action(B, A);
+    }
+    //get the instruction from player after placing all the stash
+    /*
+    String instr;
+    Scanner sc = new Scanner(System.in);
+    instr = sc.nextLine();
+    instr.toUpperCase();
     
     while(true){
+      System.out.println("Possible actions for Player A:\n\n");
+      System.out.println("D dig in a square\n");
+      System.out.println("M move a stack to another square "+"("+);//need to change the structure here!!!!
+      instr = sc.nextLine();
+      instr.toUpperCase();   
+      switch(instr){
+      default: {
+        System.out.println("Invalid instruction, please input again!\n");
+        continue;
+      }
+      case"D":{
       display disp = new display();
       split_line();
       System.out.println("Player A's turn:\n");
@@ -111,18 +160,26 @@ public class game {
         System.out.println("Player B wins, congratulation!\n");
         break;
       }
+      continue;
+      }
+      }
+    */    
+      /*
+      while (true) {
+        System.out.println("Start testing!!!!!!\n");
+        System.out.println("Move A:\n");
+        move_stash(A);
+        disp.display_board(disp.draw_wholeboard(A.getboard(), B.getboard()));
+        disp.display_board(disp.draw_wholeboard(B.getboard(), A.getboard()));
+        System.out.println("Move B:\n");
+        move_stash(B);
+        disp.display_board(disp.draw_wholeboard(B.getboard(), A.getboard()));
+        disp.display_board(disp.draw_wholeboard(A.getboard(), B.getboard()));
+        System.out.println("Finish testing!\n");
+      }
+      */
+    //}
 
-      System.out.println("Start testing!!!!!!\n");
-      System.out.println("Move A:\n");
-      move_stash(A);
-      disp.display_board(disp.draw_wholeboard(A.getboard(), B.getboard()));
-      disp.display_board(disp.draw_wholeboard(B.getboard(), A.getboard()));
-      System.out.println("Move B:\n");
-      move_stash(B);
-      disp.display_board(disp.draw_wholeboard(B.getboard(), A.getboard()));
-      disp.display_board(disp.draw_wholeboard(A.getboard(), B.getboard()));
-      System.out.println("Finish testing!\n");
-    } 
   }
 
   //if all the stash has been dug
@@ -185,7 +242,7 @@ public class game {
     }
   }
     
-  public void player_place_stash(player P, stash sh, ArrayList<int []> hitlist){
+  public void player_place_stash(player P, stash sh, ArrayList<Integer> hitlist){
     String s;
     Scanner sc = new Scanner(System.in);
     boolean validinput = false;
@@ -216,22 +273,33 @@ public class game {
       char[] parameter = s.toCharArray();
       int[] cor = new int[2];
       cor[0] = (int) parameter[0] - 65;
-      //System.out.println(cor[0]);
       cor[1] = (int) parameter[1] - 48;
-      //System.out.println(cor[1]);
       if (P.put_stash(cor, parameter[2], sh) == -1) {
         validinput = false;
         continue;
       }
+      
+      //add direction into stash
+      sh.add_direct(parameter[2]);
+
+      //place success
       System.out.println("place stash successfully!\n");
       validinput = true;
-    
-    if (hitlist!=null) {
+
+      //if the hitlist is not empty
+      if (hitlist!=null) {
       for (int i = 0; i < hitlist.size(); i++) {
-        int diff_x = hitlist.get(i)[0];
-        int diff_y = hitlist.get(i)[1];
+        //get the mark of hit block
+        int mark = hitlist.get(i);
+        
+        //get the after relative cordinate
+        //we pass in the block mark and the direction, so that we know the block's relative cordinate after moving, then we mark this block as move_hit
+        int diff_cor[] = sh.getdiff_cor(mark, parameter[2]);
+        //mark the hit block as moved
+        int diff_x = diff_cor[0];
+        int diff_y = diff_cor[1];
         P.getboard().getblock()[cor[0]+diff_x][cor[1]+diff_y].move_hit_block();
-        P.getboard().getblock()[cor[0]+diff_x][cor[1]+diff_y].dig_block();
+        //P.getboard().getblock()[cor[0]+diff_x][cor[1]+diff_y].dig_block();
       }
     }
     }
@@ -240,16 +308,18 @@ public class game {
     disp.display_board(disp.draw_myboard(P.getboard()));
     //    sc.close();
   }
-
+  
   //in move stash, we treat it like 2 steps:
   //1. we find all the block that needs move, and mark them as unoccupied;
   //2. get the stash info from block, then we put new stash on the other place
   public void move_stash(player P){
+    System.out.println("Which stash do you want to move?\n");
     String s;
     Scanner sc = new Scanner(System.in);
     boolean validinput = false;
     while (!validinput) {
       s = sc.nextLine();
+      s = s.toUpperCase();
       if (s.length() != 2) {
         validinput = false;
         System.out.println("Invalid input length!\n");
@@ -257,6 +327,7 @@ public class game {
       }
       if (s.charAt(0) < 65 || s.charAt(0) > 90) {
         validinput = false;
+        //char s1 = s.charAt(0);
         System.out.println("Invalid row!\n");
         continue;
       }
@@ -269,18 +340,64 @@ public class game {
       int[] cor = new int[2];
       cor[0] = (int) parameter[0] - 65;
       cor[1] = (int) parameter[1] - 48;
-      ArrayList<int[]> allhits = new ArrayList<int[]>();
+      ArrayList<Integer> allhits_mark = new ArrayList<Integer>();
       if (P.find(cor[0], cor[1], P.getboard()) == -1) {
         validinput = false;
         continue;
       }
-      //find all the hit_blocks, it stores the relative cordinate of all hitted block 
-      allhits = P.find_allhits(cor[0], cor[1], P.getboard());
+      
+      //we only record all the hitted-block's mark, then we deal with it in place_stash
+      allhits_mark = P.find_allhits(cor[0], cor[1], P.getboard());
       char new_color = P.getboard().getblock()[cor[0]][cor[1]].getstash().getcolor();
       stash new_stash = new stash(new_color);
       System.out.println("So, where do you want to move your stash to?\n");
-      player_place_stash(P, new_stash, allhits);
+      player_place_stash(P, new_stash, allhits_mark);
       validinput = true;
+    }
+  }
+
+  public void my_action(player P, player opp){
+    String instr;
+    Scanner sc = new Scanner(System.in);
+    //if there is any instr being excecuted
+    boolean instr_exec = false;
+    while (!instr_exec) {
+      System.out.println("Possible actions for Player "+P.getname()+":\n\n");
+      System.out.println("D dig in a square\n");
+      System.out.println("M move a stack to another square "+"("+ P.move_remaining()+" remaining)\n");
+      System.out.println("S sonar scan " + "(" + P.sonar_remaining() + " remaining)\n");
+      System.out.println("Player " + P.getname() + ", what would you like to do?\n");
+      instr = sc.nextLine();
+      instr = instr.toUpperCase();
+      //char instr = raw_instr.charAt(0);
+      display disp = new display();
+      switch (instr) {
+      case "D":{
+        split_line();
+        System.out.println("Player "+P.getname()+"'s turn:\n");
+        System.out.println("     Your tree" + "                              " + "Player "+opp.getname()+"'s tree\n");
+        disp.display_board(disp.draw_wholeboard(P.getboard(), opp.getboard()));
+        split_line();
+        System.out.println("Player "+P.getname()+", it's your turn to guess!\n");
+        guess(opp);
+        instr_exec = true;
+        break;
+        }
+      case"M":{
+        //move stash
+        //we show the two board's for player
+        System.out.println("Player " + P.getname() + ", ready to move stash:\n");
+        System.out.println("     Your tree" + "                              " + "Player "+opp.getname()+"'s tree\n");
+        disp.display_board(disp.draw_wholeboard(P.getboard(), opp.getboard()));
+        move_stash(P);
+        instr_exec = true;
+        break;
+      }
+      default:{
+        System.out.println("invalid instruction, please input again!\n");
+        break;
+      }
+      }
     }
   }
   

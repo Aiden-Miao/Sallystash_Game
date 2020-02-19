@@ -44,9 +44,15 @@ public class board {
         return -1;
       }
     }
+    int i = 0;
     for (block my_block : blocks) {
-      board[my_block.getx()][my_block.gety()].occupy_block();
+      //occupy the block and set the mark
+      board[my_block.getx()][my_block.gety()].occupy_block(i);
       board[my_block.getx()][my_block.gety()].setstash(curr_stash);
+      System.out.printf("i is :%d\n", i);
+      System.out.printf("The x is: %d\n", my_block.getx());
+      System.out.printf("The y is: %d\n", my_block.gety());
+      i++;
     }
     return 0;
   }

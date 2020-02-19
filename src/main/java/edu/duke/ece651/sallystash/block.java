@@ -8,6 +8,7 @@ public class block {
   private boolean miss;
   private stash belong_stash;
   private boolean is_moved;
+  private int mark;
   //get the x cordinate
   public int getx() {
     return x_cor;
@@ -18,12 +19,22 @@ public class block {
     return y_cor;
   }
   
+  //set the mark
+  public void set_mark(int s) {
+    mark = s;
+  }
+  
+  //get the mark of block
+  public int get_mark() {
+    return mark;
+  }
   //get the stash that our block belong to
   public stash getstash() {
     return belong_stash;
   }
 
   public void move_hit_block() {
+    hit = true;
     is_moved = true;
   }
 
@@ -52,13 +63,15 @@ public class block {
     x_cor = x;
     y_cor = y;
   }
+
   
   //occupy the block, set occupied to true
-  public int occupy_block() {
+  public int occupy_block(int mark_num) {
     if (occupied == true) {
       return -1;
     }
     occupied = true;
+    mark = mark_num;
     return 0;
   }
   
@@ -80,7 +93,7 @@ public class block {
       miss = true;
     }
   }
-
+  
   //clear the block
   public void clear_block(){
     occupied = false;
