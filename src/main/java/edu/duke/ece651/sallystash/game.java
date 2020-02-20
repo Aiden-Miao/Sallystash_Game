@@ -2,6 +2,7 @@ package edu.duke.ece651.sallystash;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 import java.util.Scanner;
 
 
@@ -34,8 +35,11 @@ public class game {
     System.out.println("3    "+bluestack+"    1x6\n");
   }
 
-  public void print_promt(String player_name, String number_of_stack, String color) {
-    System.out.println("Player " + player_name + ", where do you want to place the " + number_of_stack + " " + color + " stack?");
+  public void print_promt(player P, String number_of_stack, String color) {
+    if (!P.get_robot()) {
+      System.out.println(
+          "Player " + P.getname() + ", where do you want to place the " + number_of_stack + " " + color + " stack?");
+    }
   }
     
   void playgame() {
@@ -63,58 +67,67 @@ public class game {
     stash B_B1 = new stash('B');
     stash B_B2 = new stash('B');
     stash B_B3 = new stash('B');
+
+    //choose robot
+    choose_robot(A);
+    choose_robot(B);
     //player A place stash
-    System.out.println(
-        "Player A, you are going place sally's stash on the board, Make sure Player B isn't looking! For each stach, type the cordinate of the upper left side of the stash, followed by either H(for horizontal) or V(for vertical). For example, M4H would place a stack horizontally starting at M4 and going to the right. You have\n");
-    //print all stacks
-    print_allstack();
-    
-    print_promt("A", "first", "Green");
+    if (!A.get_robot()) {
+      System.out.println(
+          "Player A, you are going place sally's stash on the board, Make sure Player B isn't looking! For each stach, type the cordinate of the upper left side of the stash, followed by either H(for horizontal) or V(for vertical). For example, M4H would place a stack horizontally starting at M4 and going to the right. You have\n");
+      //print all stacks
+      print_allstack();
+    }
+    print_promt(A, "first", "Green");
     player_place_stash(A, A_G1, null);
-    print_promt("A", "second", "Green");
+    print_promt(A, "second", "Green");
     player_place_stash(A, A_G2, null);
-    print_promt("A", "first", "Purple");
+    print_promt(A, "first", "Purple");
     player_place_stash(A, A_P1, null);
-    print_promt("A", "second", "Purple");
+    print_promt(A, "second", "Purple");
     player_place_stash(A, A_P2, null);
-    print_promt("A", "third", "Purple");
+    print_promt(A, "third", "Purple");
     player_place_stash(A, A_P3, null);      
-    print_promt("A", "first", "Red");
+    print_promt(A, "first", "Red");
     player_place_stash(A, A_R1, null);
-    print_promt("A", "second", "Red");
+    print_promt(A, "second", "Red");
     player_place_stash(A, A_R2, null);
-    print_promt("A", "third", "Red");
+    print_promt(A, "third", "Red");
     player_place_stash(A, A_R3, null);
-    print_promt("A", "first", "Blue");
+    print_promt(A, "first", "Blue");
     player_place_stash(A, A_B1, null);
-    print_promt("A", "second", "Blue");
+    print_promt(A, "second", "Blue");
     player_place_stash(A, A_B2, null);
-    print_promt("A", "third", "Blue");
+    print_promt(A, "third", "Blue");
     player_place_stash(A, A_B3, null);
     
     //player B place stash
-
-    print_promt("B", "first", "Green");
+    if (!B.get_robot()) {
+      System.out.println(
+          "Player B, you are going place sally's stash on the board, Make sure Player A isn't looking! For each stach, type the cordinate of the upper left side of the stash, followed by either H(for horizontal) or V(for vertical). For example, M4H would place a stack horizontally starting at M4 and going to the right. You have\n");
+      print_allstack();
+    }
+    print_promt(B, "first", "Green");
     player_place_stash(B, B_G1, null);
-    print_promt("B", "second", "Green");
+    print_promt(B, "second", "Green");
     player_place_stash(B, B_G2, null);
-    print_promt("B", "first", "Purple");
+    print_promt(B, "first", "Purple");
     player_place_stash(B, B_P1, null);
-    print_promt("B", "second", "Purple");
+    print_promt(B, "second", "Purple");
     player_place_stash(B, B_P2, null);
-    print_promt("B", "third", "Purple");
+    print_promt(B, "third", "Purple");
     player_place_stash(B, B_P3, null);
-    print_promt("B", "first", "Red");
+    print_promt(B, "first", "Red");
     player_place_stash(B, B_R1, null);
-    print_promt("B", "second", "Red");
+    print_promt(B, "second", "Red");
     player_place_stash(B, B_R2, null);
-    print_promt("B", "third", "Red");
+    print_promt(B, "third", "Red");
     player_place_stash(B, B_R3, null);
-    print_promt("B", "first", "Blue");
+    print_promt(B, "first", "Blue");
     player_place_stash(B, B_B1, null);
-    print_promt("B", "second", "Blue");
+    print_promt(B, "second", "Blue");
     player_place_stash(B, B_B2, null);    
-    print_promt("B", "third", "Blue");
+    print_promt(B, "third", "Blue");
     player_place_stash(B, B_B3, null);
         
     while (true) {
@@ -131,6 +144,23 @@ public class game {
     }
   }
 
+  public void choose_robot(player P) {
+    while (true) {
+      System.out.println("Is player " + P.getname() + " a rebot?   Y\\N\n");
+      String s = sc.nextLine();
+      if (s.equals("Y")||s.equals("y")) {
+        System.out.println("Player " + P.getname() + " set to computer\n");
+        P.set_robot();
+        break;
+      }
+      if (s.equals("N")||s.equals("n")) {
+        System.out.println("Player " + P.getname() + " set to human\n");
+        break;
+      }
+       System.out.println("Please input valid choice!\n");
+    }
+  }
+  
   //if all the stash has been dug
   public int all_been_dig(player P) {
     board b = P.getboard();
@@ -196,27 +226,54 @@ public class game {
     //Scanner sc = new Scanner(System.in);
     boolean validinput = false;
     while (!validinput) {
-      s = sc.nextLine();
+      if (!P.get_robot()) {
+        s = sc.nextLine();
+      }
+      else {
+        //generate 3 random(valid)cordinates
+        Random r = new Random();
+        char cor_arr[];
+        char c3;
+        if (sh.getcolor() == 'G' || sh.getcolor() == 'P') {
+          cor_arr = new char[] { 'H', 'V' };
+          c3 = (char)(cor_arr[r.nextInt(2)]);
+        }
+        else {
+          cor_arr = new char[] { 'U', 'L','D','R' };
+          c3 = (char)(cor_arr[r.nextInt(4)]);
+        }
+        char c1 = (char)(r.nextInt(20)+'a');
+        char c2 = (char)(r.nextInt(10)+'0');
+        s = Character.toString(c1) + Character.toString(c2) + Character.toString(c3);
+      }
       s = s.toUpperCase();
       //System.out.println(s);
       if (s.length() != 3) {
         validinput = false;
-        System.out.println("Invalid input length!\n");
+        if (!P.get_robot()) {
+          System.out.println("Invalid input length!\n");
+        }
         continue;
       }
       if (s.charAt(0) < 65 || s.charAt(0) > 90) {
         validinput = false;
-        System.out.println("Invalid row!\n");
+        if (!P.get_robot()) {
+          System.out.println("Invalid row!\n");
+        }
         continue;
       }
       if (s.charAt(1) < 48 || s.charAt(1) > 57) {
         validinput = false;
-        System.out.println("Invalid column!\n");
+        if (!P.get_robot()) {
+          System.out.println("Invalid column!\n");
+        }
         continue;
       }
       if((s.charAt(2) != 'H')&&(s.charAt(2) != 'V')&&(s.charAt(2)!='U')&&(s.charAt(2)!='D'&&(s.charAt(2)!='L')&&(s.charAt(2)!='R'))) {
         validinput = false;
-        System.out.println("Invalid direction!\n");
+        if (!P.get_robot()) {
+          System.out.println("Invalid direction!\n");
+        }
         continue;
       }
       char[] parameter = s.toCharArray();
@@ -232,7 +289,9 @@ public class game {
       sh.add_direct(parameter[2]);
 
       //place success
+      //if(!P.get_robot()){
       System.out.println("place stash successfully!\n");
+      // }
       validinput = true;
 
       //if the hitlist is not empty

@@ -8,19 +8,31 @@ public class player {
   private int sonar_action;
   private int move_action;
   private String name;
-  
+  private boolean is_robot;
   
   public player(int h, int w, String myname) {
     playboard = new board(h, w);
     sonar_action = 1;
     move_action = 3;
     name = myname;
+    is_robot = false;
   }
 
+  //set the player to robot
+  public void set_robot(){
+    is_robot = true;
+  }
+
+  //get if the player is robot
+  public boolean get_robot() {
+    return is_robot;
+  }
+
+  //return the name of the player
   public String getname() {
     return name;
   }
-  
+
   public void use_sonar() {
     sonar_action = sonar_action - 1;
   }
@@ -29,10 +41,12 @@ public class player {
     move_action = move_action - 1;
   }
 
+  //return the remaining move numbers
   public int move_remaining() {
     return move_action;
   }
 
+  //return the remaining sonar numbers
   public int sonar_remaining() {
     return sonar_action;
   }
