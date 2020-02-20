@@ -188,12 +188,20 @@ public class game {
     }
   }
   
-  public void guess(player P) {
+  public void guess(player MP, player P) {
     String s;
     //Scanner sc = new Scanner(System.in);
     boolean validinput = false;
     while (!validinput) {
-      s = sc.nextLine();
+      if (!MP.get_robot()) {
+        s = sc.nextLine();
+      }
+      else {
+        Random r = new Random();
+        char c1 = (char)(r.nextInt(20)+'a');
+        char c2 = (char)(r.nextInt(10)+'0');
+        s = Character.toString(c1) + Character.toString(c2);
+      }
       s = s.toUpperCase();
       //System.out.println(s);
       if (s.length() != 2) {
@@ -239,7 +247,7 @@ public class game {
           c3 = (char)(cor_arr[r.nextInt(2)]);
         }
         else {
-          cor_arr = new char[] { 'U', 'L','D','R' };
+          cor_arr = new char[] { 'U', 'L', 'D', 'R' };
           c3 = (char)(cor_arr[r.nextInt(4)]);
         }
         char c1 = (char)(r.nextInt(20)+'a');
@@ -321,12 +329,22 @@ public class game {
   //1. we find all the block that needs move, and mark them as unoccupied;
   //2. get the stash info from block, then we put new stash on the other place
   public void move_stash(player P){
-    System.out.println("Which stash do you want to move?\n");
+    if (!P.get_robot()) {
+      System.out.println("Which stash do you want to move?\n");
+    }
     String s;
     //Scanner sc = new Scanner(System.in);
     boolean validinput = false;
     while (!validinput) {
-      s = sc.nextLine();
+      if (!P.get_robot()) {
+        s = sc.nextLine();
+      }
+      else {
+        Random r = new Random();
+        char c1 = (char)(r.nextInt(20)+'a');
+        char c2 = (char)(r.nextInt(10)+'0');
+        s = Character.toString(c1)+ Character.toString(c2);
+      }
       s = s.toUpperCase();
       if (s.length() != 2) {
         validinput = false;
@@ -365,11 +383,21 @@ public class game {
   }
 
   //we use sonar to scan the blocks around the cordinate we give
-  public void sonar(player enemy) {
+  public void sonar(player P, player enemy) {
     board enemy_board = enemy.getboard();
     //Scanner sc = new Scanner(System.in);
     //get the input cordinate;
-    String cor = sc.nextLine();
+    String cor;
+    if (!P.get_robot()) {
+      cor = sc.nextLine();
+    }
+    //robot for sonar
+    else {
+      Random r = new Random();
+      char c1 = (char)(r.nextInt(20)+'a');
+      char c2 = (char)(r.nextInt(10)+'0');
+      cor = Character.toString(c1) + Character.toString(c2);
+    }
     cor = cor.toUpperCase();
     boolean valid_input = false;
     while (!valid_input) {
@@ -449,45 +477,79 @@ public class game {
     //if there is any instr being excecuted
     boolean instr_exec = false;
     while (!instr_exec) {
-      System.out.println("Possible actions for Player "+P.getname()+":\n\n");
-      System.out.println("D dig in a square\n");
-      System.out.println("M move a stack to another square "+"("+ P.move_remaining()+" remaining)\n");
-      System.out.println("S sonar scan " + "(" + P.sonar_remaining() + " remaining)\n\n");
-      System.out.println("Player " + P.getname() + ", what would you like to do?\n");
-      instr = sc.nextLine();
+      if (!P.get_robot()) {
+        System.out.println("Possible actions for Player " + P.getname() + ":\n\n");
+        System.out.println("D dig in a square\n");
+        System.out.println("M move a stack to another square " + "(" + P.move_remaining() + " remaining)\n");
+        System.out.println("S sonar scan " + "(" + P.sonar_remaining() + " remaining)\n\n");
+        System.out.println("Player " + P.getname() + ", what would you like to do?\n");
+      }
+      if (!P.get_robot()) {
+        instr = sc.nextLine();
+      }
+      else {
+        Random r = new Random();
+        char cor_arr[] = new char[] {'D','S','M'};
+        char c1 = (char)(cor_arr[r.nextInt(3)]);
+        //char c1 = (char)(r.nextInt(20)+'a');
+        //char c2 = (char)(r.nextInt(10)+'0');
+        instr = Character.toString(c1);
+      }
       instr = instr.toUpperCase();
       //char instr = raw_instr.charAt(0);
       display disp = new display();
       switch (instr) {
       case "D":{
-        split_line();
-        System.out.println("Player "+P.getname()+"'s turn:\n");
-        System.out.println("     Your tree" + "                              " + "Player "+opp.getname()+"'s tree\n");
-        disp.display_board(disp.draw_wholeboard(P.getboard(), opp.getboard()));
-        split_line();
-        System.out.println("Player "+P.getname()+", it's your turn to guess!\n");
-        guess(opp);
+        if (!P.get_robot()) {
+          split_line();
+          System.out.println("Player " + P.getname() + "'s turn:\n");
+          System.out
+              .println("     Your tree" + "                              " + "Player " + opp.getname() + "'s tree\n");
+          disp.display_board(disp.draw_wholeboard(P.getboard(), opp.getboard()));
+          split_line();
+          System.out.println("Player " + P.getname() + ", it's your turn to guess!\n");
+        }
+        guess(P, opp);
         instr_exec = true;
         break;
         }
       case"M":{
         //move stash
         //we show the two board's for player
+        if (P.move_remaining() <= 0) {
+          if (!P.get_robot()) {
+            System.out.println("Running out of move action, choose again!\n");
+          }
+          break;
+        }
         P.use_move();//player uses the move
-        System.out.println("Player " + P.getname() + ", ready to move stash:\n");
-        System.out.println("     Your tree" + "                              " + "Player "+opp.getname()+"'s tree\n");
-        disp.display_board(disp.draw_wholeboard(P.getboard(), opp.getboard()));
+        if (!P.get_robot()) {
+          System.out.println("Player " + P.getname() + ", ready to move stash:\n");
+          System.out
+              .println("     Your tree" + "                              " + "Player " + opp.getname() + "'s tree\n");
+          disp.display_board(disp.draw_wholeboard(P.getboard(), opp.getboard()));
+        }
         move_stash(P);
         instr_exec = true;
         break;
       }
       case "S": {
+        if (P.sonar_remaining() <= 0) {
+          System.out.println("Running out of sonar action, choose again!\n");
+          break;
+        }
+        if (!P.get_robot()) {
+          System.out.println("Where you do you want to scan?\n");
+        }
         P.use_sonar();//player use sonar
-        sonar(opp);
+        sonar(P, opp);
+        instr_exec = true;
         break;
       }
       default:{
-        System.out.println("invalid instruction, please input again!\n");
+        if (!P.get_robot()) {
+          System.out.println("invalid instruction, please input again!\n");
+        }
         break;
       }
       }

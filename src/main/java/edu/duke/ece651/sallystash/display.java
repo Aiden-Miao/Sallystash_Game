@@ -39,7 +39,7 @@ public class display {
     //System.out.println(myboard);
     return myboard;
   }
-
+  
   void display_board(String p1board)
   {
     System.out.println(p1board);
