@@ -8,11 +8,19 @@ import java.util.Scanner;
 public class game {
   private player A;
   private player B;
+  private Scanner sc;
   //private int sonar_action;
   //private int move_action;
   public game(int h, int w) {
     A = new player(h, w,"A");
     B = new player(h, w,"B");
+    sc = new Scanner(System.in);
+  }
+
+  public game(int h, int w, String instruction) {
+    A = new player(h, w,"A");
+    B = new player(h, w,"B");
+    sc = new Scanner(instruction);
   }
 
   public void print_allstack() {
@@ -121,70 +129,6 @@ public class game {
         break;
       }
     }
-    //get the instruction from player after placing all the stash
-    /*
-    String instr;
-    Scanner sc = new Scanner(System.in);
-    instr = sc.nextLine();
-    instr.toUpperCase();
-    
-    while(true){
-      System.out.println("Possible actions for Player A:\n\n");
-      System.out.println("D dig in a square\n");
-      System.out.println("M move a stack to another square "+"("+);//need to change the structure here!!!!
-      instr = sc.nextLine();
-      instr.toUpperCase();   
-      switch(instr){
-      default: {
-        System.out.println("Invalid instruction, please input again!\n");
-        continue;
-      }
-      case"D":{
-      display disp = new display();
-      split_line();
-      System.out.println("Player A's turn:\n");
-      System.out.println("     Your tree" + "                              " + "Player B's tree\n");
-      disp.display_board(disp.draw_wholeboard(A.getboard(), B.getboard()));
-      split_line();
-      System.out.println("Player A, it's your turn to guess!\n");
-      guess(B);
-      //if all of B's stashed are dug, then A wins
-      if (all_been_dig(B) == 0) {
-        System.out.println("Player A wins, congratulation!\n");
-        break;
-      }
-      split_line();
-      System.out.println("Player B's turn:\n");
-      System.out.println("     Your tree" + "                              " + "Player A's tree\n");
-      disp.display_board(disp.draw_wholeboard(B.getboard(), A.getboard()));
-      split_line();
-      System.out.println("Player B, it's your turn to guess!\n");
-      guess(A);
-      //if all A's stash are dug, then B wins
-      if (all_been_dig(A) == 0) {
-        System.out.println("Player B wins, congratulation!\n");
-        break;
-      }
-      continue;
-      }
-      }
-    */    
-      /*
-      while (true) {
-        System.out.println("Start testing!!!!!!\n");
-        System.out.println("Move A:\n");
-        move_stash(A);
-        disp.display_board(disp.draw_wholeboard(A.getboard(), B.getboard()));
-        disp.display_board(disp.draw_wholeboard(B.getboard(), A.getboard()));
-        System.out.println("Move B:\n");
-        move_stash(B);
-        disp.display_board(disp.draw_wholeboard(B.getboard(), A.getboard()));
-        disp.display_board(disp.draw_wholeboard(A.getboard(), B.getboard()));
-        System.out.println("Finish testing!\n");
-      }
-      */
-    //}
-
   }
 
   //if all the stash has been dug
@@ -216,7 +160,7 @@ public class game {
   
   public void guess(player P) {
     String s;
-    Scanner sc = new Scanner(System.in);
+    //Scanner sc = new Scanner(System.in);
     boolean validinput = false;
     while (!validinput) {
       s = sc.nextLine();
@@ -249,7 +193,7 @@ public class game {
     
   public void player_place_stash(player P, stash sh, ArrayList<Integer> hitlist){
     String s;
-    Scanner sc = new Scanner(System.in);
+    //Scanner sc = new Scanner(System.in);
     boolean validinput = false;
     while (!validinput) {
       s = sc.nextLine();
@@ -320,7 +264,7 @@ public class game {
   public void move_stash(player P){
     System.out.println("Which stash do you want to move?\n");
     String s;
-    Scanner sc = new Scanner(System.in);
+    //Scanner sc = new Scanner(System.in);
     boolean validinput = false;
     while (!validinput) {
       s = sc.nextLine();
@@ -361,9 +305,10 @@ public class game {
     }
   }
 
+  //we use sonar to scan the blocks around the cordinate we give
   public void sonar(player enemy) {
     board enemy_board = enemy.getboard();
-    Scanner sc = new Scanner(System.in);
+    //Scanner sc = new Scanner(System.in);
     //get the input cordinate;
     String cor = sc.nextLine();
     cor = cor.toUpperCase();
@@ -417,16 +362,17 @@ public class game {
       if (colormap.get('B') != null) {
         blue = colormap.get('B');
       }
-      System.out.println("Green stacks occupy " + green + " squares");
-      System.out.println("Purple stacks occupy " + purple + " squares");
-      System.out.println("Red stacks occupy " + red + " squares");
-      System.out.println("Blue stacks occupy " + blue + " squares");
+      System.out.println("Green stacks occupy " + green + " squares\n");
+      System.out.println("Purple stacks occupy " + purple + " squares\n");
+      System.out.println("Red stacks occupy " + red + " squares\n");
+      System.out.println("Blue stacks occupy " + blue + " squares\n");
       valid_input = true;
     }
     //sc.close();
   }
 
   public char scan(int x, int y, board rv_board) {
+    //if the sonar range gets beyond board or the block it's not occupied, we just return 'F' 
     if ((x < 0 || x >= rv_board.get_height()) || y < 0 || y >= rv_board.get_width()) {
       return 'F';
     }
@@ -440,14 +386,14 @@ public class game {
   
   public void my_action(player P, player opp){
     String instr;
-    Scanner sc = new Scanner(System.in);
+    //Scanner sc = new Scanner(System.in);
     //if there is any instr being excecuted
     boolean instr_exec = false;
     while (!instr_exec) {
       System.out.println("Possible actions for Player "+P.getname()+":\n\n");
       System.out.println("D dig in a square\n");
       System.out.println("M move a stack to another square "+"("+ P.move_remaining()+" remaining)\n");
-      System.out.println("S sonar scan " + "(" + P.sonar_remaining() + " remaining)\n");
+      System.out.println("S sonar scan " + "(" + P.sonar_remaining() + " remaining)\n\n");
       System.out.println("Player " + P.getname() + ", what would you like to do?\n");
       instr = sc.nextLine();
       instr = instr.toUpperCase();
@@ -468,6 +414,7 @@ public class game {
       case"M":{
         //move stash
         //we show the two board's for player
+        P.use_move();//player uses the move
         System.out.println("Player " + P.getname() + ", ready to move stash:\n");
         System.out.println("     Your tree" + "                              " + "Player "+opp.getname()+"'s tree\n");
         disp.display_board(disp.draw_wholeboard(P.getboard(), opp.getboard()));
@@ -476,6 +423,7 @@ public class game {
         break;
       }
       case "S": {
+        P.use_sonar();//player use sonar
         sonar(opp);
         break;
       }
@@ -491,5 +439,6 @@ public class game {
   public static void main(String[] args) {
     game mygame = new game(20, 10);
     mygame.playgame();
+    mygame.sc.close();
   }
 }
