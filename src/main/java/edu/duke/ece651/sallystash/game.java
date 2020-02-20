@@ -69,22 +69,22 @@ public class game {
     print_promt("A", "second", "Purple");
     player_place_stash(A, A_P2, null);
     print_promt("A", "third", "Purple");
-    player_place_stash(A, A_P3, null);  
-    */    
+    player_place_stash(A, A_P3, null);      
     print_promt("A", "first", "Red");
     player_place_stash(A, A_R1, null);
     print_promt("A", "second", "Red");
     player_place_stash(A, A_R2, null);
     print_promt("A", "third", "Red");
     player_place_stash(A, A_R3, null);
-    /*    
+    
     print_promt("A", "first", "Blue");
     player_place_stash(A, A_B1, null);
     print_promt("A", "second", "Blue");
     player_place_stash(A, A_B2, null);
+    */    
     print_promt("A", "third", "Blue");
     player_place_stash(A, A_B3, null);
-    */
+    
     //player B place stash
     /*
     print_promt("B", "first", "Green");
@@ -97,24 +97,33 @@ public class game {
     player_place_stash(B, B_P2, null);
     print_promt("B", "third", "Purple");
     player_place_stash(B, B_P3, null);
-    */    
+        
     print_promt("B", "first", "Red");
     player_place_stash(B, B_R1, null);
     print_promt("B", "second", "Red");
     player_place_stash(B, B_R2, null);
     print_promt("B", "third", "Red");
     player_place_stash(B, B_R3, null);
-    /*    
+        
     print_promt("B", "first", "Blue");
     player_place_stash(B, B_B1, null);
     print_promt("B", "second", "Blue");
     player_place_stash(B, B_B2, null);
+    */    
     print_promt("B", "third", "Blue");
     player_place_stash(B, B_B3, null);
-    */    
+        
     while (true) {
       my_action(A, B);
+      if (all_been_dig(B)==0) {
+        System.out.println("Player A wins, congratulation!\n");
+        break;
+      }
       my_action(B, A);
+      if (all_been_dig(A)==0) {
+        System.out.println("Player B wins, congratulation!\n");
+        break;
+      }
     }
     //get the instruction from player after placing all the stash
     /*
