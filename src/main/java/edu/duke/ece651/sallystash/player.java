@@ -99,11 +99,12 @@ public class player {
     }
     return hitlist;
   }
-
+  /*
   public int sonar(int x, int y) {
     
     return 0;
   }
+  */
     
   public board getboard() {
     return playboard;

@@ -1,6 +1,7 @@
 package edu.duke.ece651.sallystash;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
 
@@ -59,7 +60,7 @@ public class game {
         "Player A, you are going place sally's stash on the board, Make sure Player B isn't looking! For each stach, type the cordinate of the upper left side of the stash, followed by either H(for horizontal) or V(for vertical). For example, M4H would place a stack horizontally starting at M4 and going to the right. You have\n");
     //print all stacks
     print_allstack();
-    /*
+    
     print_promt("A", "first", "Green");
     player_place_stash(A, A_G1, null);
     print_promt("A", "second", "Green");
@@ -76,17 +77,15 @@ public class game {
     player_place_stash(A, A_R2, null);
     print_promt("A", "third", "Red");
     player_place_stash(A, A_R3, null);
-    
     print_promt("A", "first", "Blue");
     player_place_stash(A, A_B1, null);
     print_promt("A", "second", "Blue");
     player_place_stash(A, A_B2, null);
-    */    
     print_promt("A", "third", "Blue");
     player_place_stash(A, A_B3, null);
     
     //player B place stash
-    /*
+
     print_promt("B", "first", "Green");
     player_place_stash(B, B_G1, null);
     print_promt("B", "second", "Green");
@@ -97,19 +96,16 @@ public class game {
     player_place_stash(B, B_P2, null);
     print_promt("B", "third", "Purple");
     player_place_stash(B, B_P3, null);
-        
     print_promt("B", "first", "Red");
     player_place_stash(B, B_R1, null);
     print_promt("B", "second", "Red");
     player_place_stash(B, B_R2, null);
     print_promt("B", "third", "Red");
     player_place_stash(B, B_R3, null);
-        
     print_promt("B", "first", "Blue");
     player_place_stash(B, B_B1, null);
     print_promt("B", "second", "Blue");
-    player_place_stash(B, B_B2, null);
-    */    
+    player_place_stash(B, B_B2, null);    
     print_promt("B", "third", "Blue");
     player_place_stash(B, B_B3, null);
         
@@ -365,6 +361,83 @@ public class game {
     }
   }
 
+  public void sonar(player enemy) {
+    board enemy_board = enemy.getboard();
+    Scanner sc = new Scanner(System.in);
+    //get the input cordinate;
+    String cor = sc.nextLine();
+    cor = cor.toUpperCase();
+    boolean valid_input = false;
+    while (!valid_input) {
+      if (cor.length() != 2) {
+        valid_input = false;
+        System.out.println("Invalid input length!\n");
+        continue;
+      }
+       if (cor.charAt(0) < 65 || cor.charAt(0) > 90) {
+        valid_input = false;
+        //char s1 = s.charAt(0);
+        System.out.println("Invalid row!\n");
+        continue;
+      }
+      if (cor.charAt(1) < 48 || cor.charAt(1) > 57) {
+        valid_input = false;
+        System.out.println("Invalid column!\n");
+        continue;
+      }
+      char[] my_cordinate = cor.toCharArray();
+      int[] my_cor = new int[2];
+      my_cor[0] = (int) my_cordinate[0] - 65;
+      my_cor[1] = (int) my_cordinate[1] - 48;
+      HashMap<Character, Integer> colormap = new HashMap<>();
+      for (int i = - 3; i <= 3; i++) {
+        for (int j = Math.abs(i) - 3; j <= 3 - Math.abs(i); j++) {
+          char res = scan(my_cor[0] + i, my_cor[1] + j, enemy_board);
+          if (colormap.get(res) == null) {
+            colormap.put(res, 1);
+          }
+          else {
+            colormap.put(res, colormap.get(res) + 1);
+          }
+        }
+      }
+      int green = 0;
+      int purple = 0;
+      int red = 0;
+      int blue = 0;
+      if (colormap.get('G') != null) {
+        green = colormap.get('G');
+      }
+      if (colormap.get('P') != null) {
+        purple = colormap.get('P');
+      }
+      if (colormap.get('R') != null) {
+        red = colormap.get('R');
+      }
+      if (colormap.get('B') != null) {
+        blue = colormap.get('B');
+      }
+      System.out.println("Green stacks occupy " + green + " squares");
+      System.out.println("Purple stacks occupy " + purple + " squares");
+      System.out.println("Red stacks occupy " + red + " squares");
+      System.out.println("Blue stacks occupy " + blue + " squares");
+      valid_input = true;
+    }
+    //sc.close();
+  }
+
+  public char scan(int x, int y, board rv_board) {
+    if ((x < 0 || x >= rv_board.get_height()) || y < 0 || y >= rv_board.get_width()) {
+      return 'F';
+    }
+    else if (!rv_board.getblock()[x][y].is_occupied()) {
+      return 'F';
+    }
+    else{
+      return rv_board.getblock()[x][y].getstash().getcolor();
+    }
+  }
+  
   public void my_action(player P, player opp){
     String instr;
     Scanner sc = new Scanner(System.in);
@@ -400,6 +473,10 @@ public class game {
         disp.display_board(disp.draw_wholeboard(P.getboard(), opp.getboard()));
         move_stash(P);
         instr_exec = true;
+        break;
+      }
+      case "S": {
+        sonar(opp);
         break;
       }
       default:{
