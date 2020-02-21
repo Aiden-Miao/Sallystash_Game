@@ -1,0 +1,14 @@
+package edu.duke.ece651.sallystash;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
+
+public class gameTest {
+  @Test
+  public void test_() {
+    String s = "";
+    mygame = new game(20, 10,)
+  }
+
+}

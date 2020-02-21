@@ -5,10 +5,28 @@ import java.util.Scanner;
 public class game {
   private player A;
   private player B;
-
+  private Scanner sc;
   public game(int h, int w) {
     A = new player(h, w);
     B = new player(h, w);
+    sc = new Scanner(System.in);
+  }
+
+  public game(int h, int w, String ins) {
+    A = new player(h, w);
+    B = new player(h, w);
+    sc = new Scanner(ins);
+  }
+
+  public void print_allstack() {
+    String green = "Green stacks that are";
+    String Purple = "Purple stacks that are";
+    String red = "Red stacks that are";
+    String blue = "Blue stacks that are";
+    System.out.println("2    " + green + "    1x2\n");
+    System.out.println("3    " + Purple + "    1x3\n");
+    System.out.println("3    " + red + "    1x4\n");
+    System.out.println("2    " + blue + "    1x6\n");
   }
   void playgame() {
     //initialize stash for A
@@ -36,6 +54,8 @@ public class game {
     stash B_B2 = new stash('B');
 
     //player A place stash
+    System.out.println("Player A, you are going to place sally's stash on the board. Make sure Player B isn't looking! For each stack, type the coordinate of the upper left side of the stash, followed by either H(for horizontal) or V(for vertical). For example, M4h would place a stack horizonally starting at M4 and going to the right. You have \n");
+    print_allstack();
     System.out.println("Player A, where do you want to place the first Green Stack?\n");
     player_place_stash(A, A_G1);
     System.out.println("Player A, where do you want to place the second Green Stack?\n");
@@ -58,6 +78,8 @@ public class game {
     player_place_stash(A, A_B2);
     
     //player B place stash
+    System.out.println("Player B, you are going to place sally's stash on the board. Make sure Player A isn't looking! For each stack, type the coordinate of the upper left side of the stash, followed by either H(for horizontal) or V(for vertical). For example, M4h would place a stack horizonally starting at M4 and going to the right. You have \n");
+    print_allstack();
     System.out.println("Player B, where do you want to place the first Green Stack?\n");
     player_place_stash(B, B_G1);
     System.out.println("Player B, where do you want to place the second Green Stack?\n");
@@ -135,7 +157,7 @@ public class game {
   
   public void guess(player P) {
     String s;
-    Scanner sc = new Scanner(System.in);
+    //Scanner sc = new Scanner(System.in);
     boolean validinput = false;
     while (!validinput) {
       s = sc.nextLine();
@@ -168,7 +190,7 @@ public class game {
     
   public void player_place_stash(player P, stash sh){
     String s;
-    Scanner sc = new Scanner(System.in);
+    //Scanner sc = new Scanner(System.in);
     boolean validinput = false;
     while (!validinput) {
       s = sc.nextLine();
@@ -215,5 +237,6 @@ public class game {
   public static void main(String[] args) {
     game mygame = new game(20, 10);
     mygame.playgame();
+    mygame.sc.close();
   }
 }
