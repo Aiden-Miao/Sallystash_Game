@@ -4,3 +4,5 @@ ECE 651 PROJ-2 km480
 ##commit comment: ver2_delivery
 
 ##commit id:**commit_SHA(dba01c32)**
+
+Ver1 is in the branch ver1_delivery
