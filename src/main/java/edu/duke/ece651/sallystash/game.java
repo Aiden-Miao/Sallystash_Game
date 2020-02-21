@@ -18,6 +18,7 @@ public class game {
     sc = new Scanner(System.in);
   }
 
+  //initialize game with fixed instruction
   public game(int h, int w, String instruction) {
     A = new player(h, w,"A");
     B = new player(h, w,"B");
@@ -152,6 +153,7 @@ public class game {
     */
   }
 
+  //let player decide who should be computer
   public void choose_robot(player P) {
     while (true) {
       System.out.println("Is player " + P.getname() + " a rebot?   Y\\N\n");
@@ -187,6 +189,7 @@ public class game {
     return 0;
   }
 
+  //print out the dividing line
   public void split_line() {
     for (int i = 0; i < 65; i++) {
       System.out.printf("-");
@@ -198,7 +201,6 @@ public class game {
   
   public void guess(player MP, player P) {
     String s;
-    //Scanner sc = new Scanner(System.in);
     boolean validinput = false;
     while (!validinput) {
       if (!MP.get_robot()) {
@@ -211,7 +213,7 @@ public class game {
         s = Character.toString(c1) + Character.toString(c2);
       }
       s = s.toUpperCase();
-      //System.out.println(s);
+      //check validation of input
       if (s.length() != 2) {
         validinput = false;
         System.out.println("Invalid input length!\n");
@@ -236,10 +238,10 @@ public class game {
       validinput = true;
     }
   }
-    
+
+  //this function let player place stash on the board
   public void player_place_stash(player P, stash sh, ArrayList<Integer> hitlist){
     String s;
-    //Scanner sc = new Scanner(System.in);
     boolean validinput = false;
     while (!validinput) {
       if (!P.get_robot()) {
@@ -444,6 +446,7 @@ public class game {
       my_cor[0] = (int) my_cordinate[0] - 65;
       my_cor[1] = (int) my_cordinate[1] - 48;
       HashMap<Character, Integer> colormap = new HashMap<>();
+      //iterate through all the cordinates in the dimond shape
       for (int i = - 3; i <= 3; i++) {
         for (int j = Math.abs(i) - 3; j <= 3 - Math.abs(i); j++) {
           char res = scan(my_cor[0] + i, my_cor[1] + j, enemy_board);
@@ -459,6 +462,7 @@ public class game {
       int purple = 0;
       int red = 0;
       int blue = 0;
+      //we store the count in a map. every time we meet this color, add 1 to count
       if (colormap.get('G') != null) {
         green = colormap.get('G');
       }
@@ -479,7 +483,6 @@ public class game {
       }
       valid_input = true;
     }
-    //sc.close();
   }
 
   public char scan(int x, int y, board rv_board) {
@@ -524,6 +527,7 @@ public class game {
       display disp = new display();
       switch (instr) {
       case "D":{
+        //dig action
         if (!P.get_robot()) {
           split_line();
           System.out.println("Player " + P.getname() + "'s turn:\n");
@@ -561,6 +565,7 @@ public class game {
         break;
       }
       case "S": {
+        //use sonar
         if (P.sonar_remaining() <= 0) {
           if (!P.get_robot()) {
             System.out.println("Running out of sonar action, choose again!\n");
