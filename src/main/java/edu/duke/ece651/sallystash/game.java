@@ -25,10 +25,10 @@ public class game {
   }
 
   public void print_allstack() {
-    String greenstack = "Green stacks that";
-    String purplestack = "Purple stacks that";
-    String redstack = "Red stacks that";
-    String bluestack = "Blue stacks that";
+    String greenstack = "Green stacks that are";
+    String purplestack = "Purple stacks that are";
+    String redstack = "Red stacks that are";
+    String bluestack = "Blue stacks that are";
     System.out.println("2    "+greenstack+"    1x2\n");
     System.out.println("3    "+purplestack+"    1x3\n");
     System.out.println("3    "+redstack+"    1x4\n");
@@ -143,11 +143,13 @@ public class game {
         break;
       }
     }
+    /*
     display disp = new display();
     String ans = disp.draw_wholeboard(A.getboard(), B.getboard());
     disp.display_board(ans);
     String ans2 = disp.draw_wholeboard(B.getboard(), A.getboard());
     disp.display_board(ans2);
+    */
   }
 
   public void choose_robot(player P) {

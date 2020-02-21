@@ -20,9 +20,9 @@ public class block {
   }
   
   //set the mark
-  public void set_mark(int s) {
-    mark = s;
-  }
+  //  public void set_mark(int s) {
+  //   mark = s;
+  // }
   
   //get the mark of block
   public int get_mark() {
