@@ -61,7 +61,7 @@ public class player {
       return -1;
     };
     //try to place block on the board
-    if (playboard.place_block(playstash) == -1) {
+    if (playboard.place_block(playstash,this) == -1) {
       return -1;
     }
     return 0;
@@ -73,7 +73,7 @@ public class player {
       return -1;
     }
     else {
-      oppboard.digat(x, y);
+      oppboard.digat(x, y, this);
       return 0;
     }
   }
@@ -85,7 +85,9 @@ public class player {
     }
     //if the place have stash or not
     if (!myboard.getblock()[x][y].is_occupied()) {
-      System.out.println("There's no stash here to move, choose a right place!\n");
+      if (!get_robot()) {
+        System.out.println("There's no stash here to move, choose a right place!\n");
+      }
       return -1;
     }
     //clear the block within the stash, but we can still get the color from the stash
@@ -107,7 +109,7 @@ public class player {
             //int[] begincor = my_stash.get_begincor();
             //int[] temp = {i - begincor[0], j - begincor[1]};
             int block_mark = myboard.getblock()[i][j].get_mark();
-            System.out.printf("!!!!!The mark of block is:%d\n",block_mark);
+            //System.out.printf("!!!!!The mark of block is:%d\n",block_mark);
             hitlist.add(block_mark);
           }
         }

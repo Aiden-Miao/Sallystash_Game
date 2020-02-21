@@ -133,14 +133,14 @@ public class stash {
    //return the relative cordinate after moving
   public int[] getdiff_cor(int blc_mark, char dirct) {
     ArrayList<int[]> ans_list = direct_cor_map.get(dirct);
-    System.out.println(color);
-    System.out.printf("the mark of blc_mark is :%d\n", blc_mark);
-    System.out.printf("the direction is :%c\n", dirct);
+    //System.out.println(color);
+    //System.out.printf("the mark of blc_mark is :%d\n", blc_mark);
+    //System.out.printf("the direction is :%c\n", dirct);
     int ans[] = ans_list.get(blc_mark);
-    for(int [] ans2:ans_list){
-    System.out.printf("The return x is:%d\n", ans2[0]);
-    System.out.printf("The return y is:%d\n", ans2[1]);
-    }
+    //for(int [] ans2:ans_list){
+      //System.out.printf("The return x is:%d\n", ans2[0]);
+      //System.out.printf("The return y is:%d\n", ans2[1]);
+    //}
     return ans;
   }
   
@@ -149,6 +149,9 @@ public class stash {
     direction = dir;
   }
 
+  public char get_direct() {
+    return direction;
+  }
   //after we set up arraylist of blocks, if the board found the block
   //cordinate is invalid, we need to set again, so we need to reset our blocks
   public void reset_blocks() {

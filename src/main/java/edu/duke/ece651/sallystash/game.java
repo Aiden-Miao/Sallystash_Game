@@ -134,6 +134,7 @@ public class game {
       my_action(A, B);
       if (all_been_dig(B)==0) {
         System.out.println("Player A wins, congratulation!\n");
+        
         break;
       }
       my_action(B, A);
@@ -142,6 +143,11 @@ public class game {
         break;
       }
     }
+    display disp = new display();
+    String ans = disp.draw_wholeboard(A.getboard(), B.getboard());
+    disp.display_board(ans);
+    String ans2 = disp.draw_wholeboard(B.getboard(), A.getboard());
+    disp.display_board(ans2);
   }
 
   public void choose_robot(player P) {
@@ -297,9 +303,9 @@ public class game {
       sh.add_direct(parameter[2]);
 
       //place success
-      //if(!P.get_robot()){
-      System.out.println("place stash successfully!\n");
-      // }
+      if(!P.get_robot()){
+        System.out.println("place stash successfully!\n");
+      }
       validinput = true;
 
       //if the hitlist is not empty
@@ -317,11 +323,12 @@ public class game {
         P.getboard().getblock()[cor[0]+diff_x][cor[1]+diff_y].move_hit_block();
         //P.getboard().getblock()[cor[0]+diff_x][cor[1]+diff_y].dig_block();
       }
+      }
     }
-    }
-    
     display disp = new display();
-    disp.display_board(disp.draw_myboard(P.getboard()));
+    if (!P.get_robot()) {
+      disp.display_board(disp.draw_myboard(P.getboard()));
+    }
     //    sc.close();
   }
   
@@ -331,7 +338,7 @@ public class game {
   public void move_stash(player P){
     if (!P.get_robot()) {
       System.out.println("Which stash do you want to move?\n");
-    }
+      }
     String s;
     //Scanner sc = new Scanner(System.in);
     boolean validinput = false;
@@ -376,7 +383,9 @@ public class game {
       allhits_mark = P.find_allhits(cor[0], cor[1], P.getboard());
       char new_color = P.getboard().getblock()[cor[0]][cor[1]].getstash().getcolor();
       stash new_stash = new stash(new_color);
-      System.out.println("So, where do you want to move your stash to?\n");
+      if (!P.get_robot()) {
+        System.out.println("So, where do you want to move your stash to?\n");
+      }
       player_place_stash(P, new_stash, allhits_mark);
       validinput = true;
     }
@@ -401,6 +410,17 @@ public class game {
     cor = cor.toUpperCase();
     boolean valid_input = false;
     while (!valid_input) {
+      if (!P.get_robot()) {
+        cor = sc.nextLine();
+          }
+      //robot for sonar
+      else {
+        Random r = new Random();
+        char c1 = (char)(r.nextInt(20)+'a');
+        char c2 = (char)(r.nextInt(10)+'0');
+        cor = Character.toString(c1) + Character.toString(c2);
+    }
+      cor = cor.toUpperCase();
       if (cor.length() != 2) {
         valid_input = false;
         System.out.println("Invalid input length!\n");
@@ -449,10 +469,12 @@ public class game {
       if (colormap.get('B') != null) {
         blue = colormap.get('B');
       }
-      System.out.println("Green stacks occupy " + green + " squares\n");
-      System.out.println("Purple stacks occupy " + purple + " squares\n");
-      System.out.println("Red stacks occupy " + red + " squares\n");
-      System.out.println("Blue stacks occupy " + blue + " squares\n");
+      if (!P.get_robot()) {
+        System.out.println("Green stacks occupy " + green + " squares\n");
+        System.out.println("Purple stacks occupy " + purple + " squares\n");
+        System.out.println("Red stacks occupy " + red + " squares\n");
+        System.out.println("Blue stacks occupy " + blue + " squares\n");
+      }
       valid_input = true;
     }
     //sc.close();
@@ -529,17 +551,25 @@ public class game {
               .println("     Your tree" + "                              " + "Player " + opp.getname() + "'s tree\n");
           disp.display_board(disp.draw_wholeboard(P.getboard(), opp.getboard()));
         }
+        else {
+          System.out.println("Player " + P.getname() + " used a special action\n");
+        }
         move_stash(P);
         instr_exec = true;
         break;
       }
       case "S": {
         if (P.sonar_remaining() <= 0) {
-          System.out.println("Running out of sonar action, choose again!\n");
+          if (!P.get_robot()) {
+            System.out.println("Running out of sonar action, choose again!\n");
+          }
           break;
         }
         if (!P.get_robot()) {
           System.out.println("Where you do you want to scan?\n");
+        }
+        else {
+          System.out.println("Player " + P.getname() + " used a special action\n");
         }
         P.use_sonar();//player use sonar
         sonar(P, opp);

@@ -29,18 +29,22 @@ public class board {
   }
 
   //place the blocks on the board and bind them with stash
-  public int place_block(stash curr_stash) {
+  public int place_block(stash curr_stash, player P) {
     ArrayList<block> blocks = curr_stash.getallblock();
     //check for invalid cordinates
     for (block my_block : blocks) {
       if ((my_block.getx() < 0 || my_block.getx() >= height) || (my_block.gety() < 0 || my_block.gety() >= width)) {
-        System.out.println("invalid cordinates, place again!\n");
+        if (!P.get_robot()) {
+          System.out.println("invalid cordinates, place again!\n");
+        }
         return -1;
       }
       //check for overlap, might have some bug here in ver2 move.
       //we might need to change the state of the original position
       if (board[my_block.getx()][my_block.gety()].is_occupied() == true) {
-        System.out.println("Your stash is overlapping with others, place again!\n");
+        if (!P.get_robot()) {
+          System.out.println("Your stash is overlapping with others, place again!\n");
+        }
         return -1;
       }
     }
@@ -49,16 +53,16 @@ public class board {
       //occupy the block and set the mark
       board[my_block.getx()][my_block.gety()].occupy_block(i);
       board[my_block.getx()][my_block.gety()].setstash(curr_stash);
-      System.out.printf("i is :%d\n", i);
-      System.out.printf("The x is: %d\n", my_block.getx());
-      System.out.printf("The y is: %d\n", my_block.gety());
+      //System.out.printf("i is :%d\n", i);
+      //System.out.printf("The x is: %d\n", my_block.getx());
+      //System.out.printf("The y is: %d\n", my_block.gety());
       i++;
     }
     return 0;
   }
 
   //dig at (x,y), if we find stash, then change the state to hit
-  public void digat(int x, int y) {
+  public void digat(int x, int y, player P) {
     /*
   if ((x < 0 || x >= height)|| (y < 0 || y >= width)) {
   System.out.println("You dig a invalid position!\n");
@@ -66,12 +70,22 @@ public class board {
   }
     */
     if (board[x][y].is_occupied()) {
-      System.out.println("You found a stack!\n");
+      if (!P.get_robot()) {
+        System.out.println("You found a stack!\n");
+      }
+      else {
+        //System.out.println("Player "+P.getname() + " found a stack at "+ (char)(x+65) + y +"!\n");
+      }
       //may be better way to do this
       board[x][y].dig_block();
     }
     else {
-      System.out.println("You missed!\n");
+      if (!P.get_robot()) {
+        System.out.println("You missed!\n");
+      }
+      else {
+        //System.out.println("Player " + P.getname() + " missed!\n");
+      }
       board[x][y].dig_block();
     }
     //return 0;

@@ -5,8 +5,9 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 public class playerTest {
+  /*
   @Test
-  public void test_() {
+   public void test_() {
     stash G1 = new stash('G');
     stash G2 = new stash('G');
     stash B1 = new stash('B');
@@ -25,4 +26,5 @@ public class playerTest {
     //disp.display_board(disp.draw_myboard(p1.getboard()));
     disp.display_board(disp.draw_wholeboard(p1.getboard(), p1.getboard()));
   }
+  */
 }
